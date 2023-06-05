@@ -13,7 +13,11 @@ function pedir_datos_cliente(){
 function cargar_productos(){
     do {
         error = 0;
-        producto = parseInt(prompt('Ingrese el código de producto que quiere llevar (1-Kit / 2-Amiguris / 3-Alfombra): '))
+        producto = parseInt(prompt("Ingrese el código de producto que quiere llevar" + "\n" + 
+        "1-Kit" + "\n" +
+        "2-Amiguris"  + "\n" + 
+        "3-Alfombra"))
+
         switch(producto) {
             case 1:
                 precio = 5000
@@ -21,44 +25,48 @@ function cargar_productos(){
                 break; ///salimos de la estructura switch
             case 2:
                 precio = 10000
-                producto = "Amiguis"
-                break; ///salimos de la estructura switch
+                producto = "Amiguris"
+                break; 
             case 3:
                 precio = 35000
                 producto = "Alfombra"
-                break; ///salimos de la estructura switch
+                break; 
             default:
                 alert('Opción incorrecta. Digite nuevamente');
                 error = 1;
         }
     } while (error == 1);       
 
-    return producto, precio
+    return // producto, precio
 }
 
+
+// Comienzo con el programa
 alert("Bienvenido al proceso de compra")
 
+//Solicito datos al cliente
 pedir_datos_cliente();
 
 do {
-    // console.log('agregando un nuevo item en el carrito de compras...');
-    // precio = parseFloat(prompt('precio del item: '));
-    // cantidad = parseInt(prompt('cantidad: '));
+    // Solicito cliente al usuarios
     cargar_productos();
 
+    // Solicito la cantidad del producto
     cantidad = parseInt(prompt("¿Que cantidad del " + producto + " desea llevar?"))
 
     console.log(producto)
     console.log(precio)
     console.log(cantidad)
     
+    // Sumo al total de la compra
     total_compra = total_compra + (precio * cantidad);
 
     salir = prompt('Desea agregar otro producto en el carrito de compras? SI/NO');
 
-}while(salir != 'NO');
+}while(salir.toUpperCase() != 'NO');
 
 console.log(nombre_y_apellido)
 console.log(total_compra)
 
-alert("El total de su compra fue de " + total_compra)
+// Le muestro al cliente el total de su compras
+alert(nombre_y_apellido.toUpperCase() + " el total de tu compra fue de $ " + total_compra) 
