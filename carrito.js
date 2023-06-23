@@ -1,10 +1,41 @@
+// Actividad 2 - Arrays - Clase 6 - 6/6/2023
+// Incorporar Arrays al proyecto integrador (copio el codigo de la preentrega 1 como punto de partida)
+
 let nombre_y_apellido;
 let producto;
 let precio;
 let total_compra = 0;
 let salir;
 let error;
+let id_producto;
 
+// Class para dar de alta los productos
+
+class Producto {
+    constructor (id, nombre, precio){
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+    }
+}
+
+// Declaro un array de productos para almacenar los objetos (BDD)
+const productos = [];
+
+// Genero los productos
+productos.push(new Producto(1, "Kit", 5000))
+productos.push(new Producto(2, "Amiguris", 10000))
+productos.push(new Producto(3, "Alfombra", 35000))
+
+
+function listar_productos(){
+    listado_productos = ""
+    for (const prod of productos){
+        listado_productos = listado_productos + prod.id + " " + prod.nombre + " " + prod.precio + "\n";
+    }
+    
+    return listado_productos
+}
 
 function pedir_datos_cliente(){
     nombre_y_apellido = prompt('Indique su nombre y apellido');
@@ -13,31 +44,25 @@ function pedir_datos_cliente(){
 function cargar_productos(){
     do {
         error = 0;
-        producto = parseInt(prompt("Ingrese el código de producto que quiere llevar" + "\n" + 
-        "1-Kit" + "\n" +
-        "2-Amiguris"  + "\n" + 
-        "3-Alfombra"))
+        id_producto = parseInt(prompt("Ingrese el código de producto que quiere llevar" + "\n" + 
+        listar_productos()))
 
-        switch(producto) {
-            case 1:
-                precio = 5000
-                producto = "Kit"
-                break; ///salimos de la estructura switch
-            case 2:
-                precio = 10000
-                producto = "Amiguris"
-                break; 
-            case 3:
-                precio = 35000
-                producto = "Alfombra"
-                break; 
-            default:
-                alert('Opción incorrecta. Digite nuevamente');
-                error = 1;
+        producto = "";
+        const elegido = productos.find(prod => prod.id === id_producto) ?? "";
+        producto = elegido.nombre ?? "";
+
+        if (producto != "" ){
+            console.log("Tiene valor")
+            precio = elegido.precio
+            producto = elegido.nombre
+        }else{
+            console.log("No tiene valor")
+            error = 1
+            alert("El código ingresado no es el correcto")
         }
     } while (error == 1);       
 
-    return // producto, precio
+    return producto, precio
 }
 
 
@@ -48,15 +73,11 @@ alert("Bienvenido al proceso de compra")
 pedir_datos_cliente();
 
 do {
-    // Solicito cliente al usuarios
+    // Solicito producto al usuarios
     cargar_productos();
 
     // Solicito la cantidad del producto
     cantidad = parseInt(prompt("¿Que cantidad del " + producto + " desea llevar?"))
-
-    console.log(producto)
-    console.log(precio)
-    console.log(cantidad)
     
     // Sumo al total de la compra
     total_compra = total_compra + (precio * cantidad);
@@ -64,9 +85,6 @@ do {
     salir = prompt('Desea agregar otro producto en el carrito de compras? SI/NO');
 
 }while(salir.toUpperCase() != 'NO');
-
-console.log(nombre_y_apellido)
-console.log(total_compra)
 
 // Le muestro al cliente el total de su compras
 alert(nombre_y_apellido.toUpperCase() + " el total de tu compra fue de $ " + total_compra) 
