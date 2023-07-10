@@ -1,0 +1,32 @@
+/* body {
+    background-image: url('../img/kits-organizadores.jpg');
+} */
+
+/* .img-back {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.62; } */
+
+.boton-envio{
+    background-color: #3c2b42;
+    border: none;
+    width: 50vw;
+    height: 10vh;
+    border-radius: 5px;
+    color: #e9e9ea;
+    box-shadow: 1px 2px 6px 1px #08141377;
+    /* //transition: 2s; */
+}
+
+.boton-envio.clicked {
+   background-color: rgb(66, 30, 150); /* Cambia el color del fondo del botón al hacer clic */
+}   
+  
+.botonMain{
+    display: flex; /* Contenedor con display flex */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+}
