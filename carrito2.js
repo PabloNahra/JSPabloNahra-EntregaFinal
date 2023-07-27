@@ -133,74 +133,78 @@ function dibujarTablaItems() {
     });
 }
 
-console.log("Comienzo con el programa");
-cargarArticulos();
 
-console.log("productos");
-console.log(productos);
-
-
-alert("Bienvenido al proceso de compra")
-
-// Limpio el Storage al comenzar
-localStorage.clear()
-
-// defino el carrito
-var carrito = [];
-
-do {
-    // Solicito producto al usuarios
-    cargar_productos();
-
-    // Solicito la cantidad del producto
-    cantidad = parseInt(prompt("¿Que cantidad del " + producto + " desea llevar?"))
-    
-    // Sumo al total de la compra
-    total_compra = total_compra + (precio * cantidad);
-
-    // (3) Enviar los valores del producto al storage
-    localStorage.setItem('producto', producto)
-    localStorage.setItem('cantidad', cantidad)
-    localStorage.setItem('precio', precio)
-    localStorage.setItem('total_compra', total_compra)
-
-    nuevo_item = {'producto': producto, 'cantidad': cantidad, 'precio': precio}
-    carrito.push(nuevo_item)
-
-    salir = prompt('Desea agregar otro producto en el carrito de compras? SI/NO');
+// Ejecución del código
+cargarArticulos().then(() => {
+    console.log("Comienzo con el programa");
+    // console.log("productos");
+    // console.log(productos);
 
 
-}while(salir.toUpperCase() != 'NO');
+    alert("Bienvenido al proceso de compra")
 
-// (3) Guardar los datos en el storage
-//console.log(carrito)
-localStorage.setItem('carrito', JSON.stringify(carrito))
 
-// (3) Tomar los valores de la compra del storage para cargar una tabla 
-tomarCarrito();
-dibujarTablaItems();
+    // Limpio el Storage al comenzar
+    localStorage.clear()
 
-// Al realizar el click de confirmar compra se dispara el proceso de confirmación
-let boton_enviar = document.getElementsByClassName("boton-envio")[0]
+    // defino el carrito
+    var carrito = [];
 
-boton_enviar.addEventListener("click", function() {
-    //Solicito datos al cliente
-    pedir_datos_cliente();
+    do {
+        // Solicito producto al usuarios
+        cargar_productos();
 
-    // Le muestro al cliente el total de su compras
-    //alert(nombre_y_apellido.toUpperCase() + " el total de tu compra fue de $ " + total_compra) 
+        // Solicito la cantidad del producto
+        cantidad = parseInt(prompt("¿Que cantidad del " + producto + " desea llevar?"))
+        
+        // Sumo al total de la compra
+        total_compra = total_compra + (precio * cantidad);
 
-    // Cambio texto y color del botón
-    //boton_enviar.value = "Compra confirmada por el total de $ xxxx"; // Modifica el valor del atributo "value" al hacer clic en el botón
-    boton_enviar.value = nombre_y_apellido.toUpperCase() + " su pedido fue confirmado; el total de tu compra fue de $ " + total_compra; // Modifica el valor del atributo "value" al hacer clic en el botón
-    boton_enviar.classList.add("clicked"); // Agrega la clase "clicked" al botón al hacer clic
+        // (3) Enviar los valores del producto al storage
+        localStorage.setItem('producto', producto)
+        localStorage.setItem('cantidad', cantidad)
+        localStorage.setItem('precio', precio)
+        localStorage.setItem('total_compra', total_compra)
 
-    // (4) Agrego Sweet Alert de gracias por su compra
-    Swal.fire({
-        title: 'ArtMatuiz',
-        text: 'Gracias por su compra',
-        icon: 'success',
-        confirmButtonText: 'Ok'
-    })
+        nuevo_item = {'producto': producto, 'cantidad': cantidad, 'precio': precio}
+        carrito.push(nuevo_item)
 
+        salir = prompt('Desea agregar otro producto en el carrito de compras? SI/NO');
+
+
+    }while(salir.toUpperCase() != 'NO');
+
+    // (3) Guardar los datos en el storage
+    //console.log(carrito)
+    localStorage.setItem('carrito', JSON.stringify(carrito))
+
+    // (3) Tomar los valores de la compra del storage para cargar una tabla 
+    tomarCarrito();
+    dibujarTablaItems();
+
+    // Al realizar el click de confirmar compra se dispara el proceso de confirmación
+    let boton_enviar = document.getElementsByClassName("boton-envio")[0]
+
+    boton_enviar.addEventListener("click", function() {
+        //Solicito datos al cliente
+        pedir_datos_cliente();
+
+        // Le muestro al cliente el total de su compras
+        //alert(nombre_y_apellido.toUpperCase() + " el total de tu compra fue de $ " + total_compra) 
+
+        // Cambio texto y color del botón
+        //boton_enviar.value = "Compra confirmada por el total de $ xxxx"; // Modifica el valor del atributo "value" al hacer clic en el botón
+        boton_enviar.value = nombre_y_apellido.toUpperCase() + " su pedido fue confirmado; el total de tu compra fue de $ " + total_compra; // Modifica el valor del atributo "value" al hacer clic en el botón
+        boton_enviar.classList.add("clicked"); // Agrega la clase "clicked" al botón al hacer clic
+
+        // (4) Agrego Sweet Alert de gracias por su compra
+        Swal.fire({
+            title: 'ArtMatuiz',
+            text: 'Gracias por su compra',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+        })
+
+    });
 });
+

@@ -1,0 +1,16 @@
+[{
+    "id": 1, 
+    "nombre": "Kit", 
+    "precio": 100
+},
+{
+    "id": 2, 
+    "nombre": "Amiguris", 
+    "precio": 200
+},
+{
+    "id": 3, 
+    "nombre": "Alfombra", 
+    "precio": 300
+}
+]
