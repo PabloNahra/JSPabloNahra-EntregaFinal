@@ -48,11 +48,9 @@ function pedir_datos_cliente(){
 function cargar_productos(){
     do {
         error = 0;
-        // id_producto = parseInt(prompt("Ingrese el código de producto que quiere llevar" + "\n" + 
-        // listar_productos()))
+        id_producto = parseInt(prompt("Ingrese el código de producto que quiere llevar" + "\n" + 
+        listar_productos()))
         
-
-
 
         producto = "";
         const elegido = productos.find(prod => prod.id === id_producto) ?? "";
