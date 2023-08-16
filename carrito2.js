@@ -28,7 +28,6 @@ async function cargarArticulos() {
             throw new Error('Vuelva a intentarlos más tarde - ' + response.status);
         }
     } catch (error) {
-        console.log(error);
     }
 }
 
