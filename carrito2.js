@@ -21,12 +21,9 @@ async function cargarArticulos() {
         const response = await fetch('./articulos.json');
         if (response.ok) {
             const todos = await response.json();
-            console.log(todos);
             for (const art of todos) {
                 productos.push(new Producto(art.id, art.nombre, art.precio));
             }
-            console.log("articulos");
-            console.log(productos);
         } else {
             throw new Error('Vuelva a intentarlos más tarde - ' + response.status);
         }
@@ -51,19 +48,20 @@ function pedir_datos_cliente(){
 function cargar_productos(){
     do {
         error = 0;
-        id_producto = parseInt(prompt("Ingrese el código de producto que quiere llevar" + "\n" + 
-        listar_productos()))
+        // id_producto = parseInt(prompt("Ingrese el código de producto que quiere llevar" + "\n" + 
+        // listar_productos()))
+        
+
+
 
         producto = "";
         const elegido = productos.find(prod => prod.id === id_producto) ?? "";
         producto = elegido.nombre ?? "";
 
         if (producto != "" ){
-            console.log("Tiene valor")
             precio = elegido.precio
             producto = elegido.nombre
         }else{
-            console.log("No tiene valor")
             error = 1
             alert("El código ingresado no es correcto")
         }
@@ -79,44 +77,38 @@ function tomarCarrito() {
 
 function dibujarTablaItems() {
     const bodyTabla = document.getElementById('items');
-    bodyTabla.innerHTML = ``; // limpio datos de la tabla
-    // recorremos el array del carrito
+    bodyTabla.innerHTML = ``; 
+    
     carrito.forEach((item,index) => {
-       let tr = document.createElement('tr'); ///creo una fila!
-       let th = document.createElement('th'); ///creo el header de la fila!
+       let tr = document.createElement('tr'); 
+       let th = document.createElement('th'); 
        
        th.textContent = index+1
-       tr.appendChild(th); ///le agrego el th como hijito de la fila
+       tr.appendChild(th); 
 
-       /////creo la celda para el nombre de item
        let td = document.createElement('td');
        td.textContent = item.producto;
-       tr.appendChild(td); ///agrego un nuevo hijito con el nombre de item a la fila
+       tr.appendChild(td); 
 
-       ///cantidad
        td = document.createElement('td');
        td.textContent = item.cantidad;
        tr.appendChild(td);
 
-       ///precio unitario
        td = document.createElement('td');
        td.textContent = item.precio;
        tr.appendChild(td);
 
-       // total_item
        td = document.createElement('td');
        td.textContent = item.precio * item.cantidad;
        tr.appendChild(td);
 
-
-       ///hago la row hija del body de la tabla
        bodyTabla.appendChild(tr); 
     });
 }
 
-
 cargarArticulos().then(() => {
     alert("Bienvenido al proceso de compra")
+
     localStorage.clear()
     var carrito = [];
     do {
